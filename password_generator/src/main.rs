@@ -53,7 +53,7 @@ fn input_lenght()->i32{
 }
 
 fn generate_password(properties:PasswordProperties)->String{
-    let mut pwd = String::new(); // ? Do I need to keep it mut pytanie na później
+    let pwd = String::new(); // ? Do I need to keep it mut pytanie na później
     match properties.kind { 
         PasswordKind::Letter=>{println!("1");
         for x in 1..properties.lenght{
