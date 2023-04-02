@@ -51,15 +51,20 @@ fn input_lenght()->i32{
         process::exit(1);},
         }
 }
+
+fn generate_password(properties:PasswordProperties)->String{
+    let mut pwd = String::new(); // ? Do I need to keep it mut pytanie na później
+    match properties.kind { //TODO: Logika funkcji + rand jak zrobić 
+        PasswordKind::Letter=>{println!("1");pwd},
+        PasswordKind::Number=>{println!("2");pwd},
+        PasswordKind::Mix=>{println!("3");pwd},
+    }
+}
 fn main() {
     let lenght=input_lenght();
     let kind = choose_kind();
     let passprop=PasswordProperties::new(lenght, kind);
-    match passprop.kind {
-        PasswordKind::Letter=>println!("1"),
-        PasswordKind::Number=>println!("2"),
-        PasswordKind::Mix=>println!("3"),
-    }
-    println!("{:?}",passprop);
+    let password=generate_password(passprop);
+    println!("{:?}",password);
     
 }
