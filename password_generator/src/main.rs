@@ -52,7 +52,9 @@ fn input_lenght()->i32{
 }
 fn main() {
     let lenght=input_lenght();
-    let passprop=PasswordProperties::new(lenght, choose_kind());
+    let kind = choose_kind();
+    let passprop=PasswordProperties::new(lenght, kind);
+
     println!("{:?}",passprop);
     
 }
