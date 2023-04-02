@@ -4,17 +4,36 @@ struct PasswordProperties{
     lenght:i32,
     kind: PasswordKind,
 }
+impl PasswordProperties{
+    fn new(lenght:i32,kind:PasswordKind)->PasswordProperties{
+        PasswordProperties { lenght, kind }
+    }
+}
 #[derive(Debug)]
 enum PasswordKind {
     Number,
     Letter,
     Mix,
 }
-impl PasswordProperties{
-    fn new(lenght:i32,kind:PasswordKind)->PasswordProperties{
-        PasswordProperties { lenght, kind }
+
+fn choose_kind()->PasswordKind{
+println!("Choose_kind: \n1.Letter\n2.Number\n3.Mix");
+let mut input = String::new();
+match io::stdin().read_line(&mut input){
+    Ok(_)=>{match input.as_str().trim(){
+        "Letter" | "1"=>{println!("{}",input);
+            PasswordKind::Letter}
+        "Number" | "2"=>{println!("{}",input);
+        PasswordKind::Number}
+        "Mix" | "3"=>{println!("{}",input);
+        PasswordKind::Mix}
+        _ => {println!("Couldn't fine the type");
+            process::exit(1)},}
     }
+    _ => {println!("Error input");
+        process::exit(1)},}
 }
+
 fn input_lenght()->i32{
     println!("Podaj długość hasła: ");
     let mut input = String::new();
@@ -30,12 +49,10 @@ fn input_lenght()->i32{
         Err(error) =>{println!("Error {}",error);
         process::exit(1);},
         }
-        
-    
 }
 fn main() {
     let lenght=input_lenght();
-    let passprop=PasswordProperties::new(32, PasswordKind::Letter);
+    let passprop=PasswordProperties::new(lenght, choose_kind());
     println!("{:?}",passprop);
     
 }
