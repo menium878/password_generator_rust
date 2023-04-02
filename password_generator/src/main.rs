@@ -16,6 +16,7 @@ enum PasswordKind {
     Mix,
 }
 
+
 fn choose_kind()->PasswordKind{
 println!("Choose_kind: \n1.Letter\n2.Number\n3.Mix");
 let mut input = String::new();
@@ -54,7 +55,11 @@ fn main() {
     let lenght=input_lenght();
     let kind = choose_kind();
     let passprop=PasswordProperties::new(lenght, kind);
-
+    match passprop.kind {
+        PasswordKind::Letter=>println!("1"),
+        PasswordKind::Number=>println!("2"),
+        PasswordKind::Mix=>println!("3"),
+    }
     println!("{:?}",passprop);
     
 }
