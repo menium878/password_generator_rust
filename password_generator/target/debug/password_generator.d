@@ -1,0 +1,1 @@
+C:\Users\Menium\Desktop\rust-projekty\password_generator_rust\password_generator\target\debug\password_generator.exe: C:\Users\Menium\Desktop\rust-projekty\password_generator_rust\password_generator\src\main.rs
