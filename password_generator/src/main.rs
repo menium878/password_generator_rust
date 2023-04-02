@@ -54,10 +54,19 @@ fn input_lenght()->i32{
 
 fn generate_password(properties:PasswordProperties)->String{
     let mut pwd = String::new(); // ? Do I need to keep it mut pytanie na później
-    match properties.kind { //TODO: Logika funkcji + rand jak zrobić 
-        PasswordKind::Letter=>{println!("1");pwd},
-        PasswordKind::Number=>{println!("2");pwd},
-        PasswordKind::Mix=>{println!("3");pwd},
+    match properties.kind { 
+        PasswordKind::Letter=>{println!("1");
+        for x in 1..properties.lenght{
+            //TODO: Logika funkcji + rand ale w zakresie ascii
+        }pwd},
+        PasswordKind::Number=>{println!("2");
+        for x in 1..properties.lenght{
+            //TODO: Logika funkcji + rand jak zrobić 
+        }pwd},
+        PasswordKind::Mix=>{println!("3");
+        for x in 1..properties.lenght{
+            //TODO: Logika funkcji + rand jak zrobić połączyć oba rozwiązania 
+        }pwd},
     }
 }
 fn main() {
