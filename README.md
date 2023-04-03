@@ -1,2 +1,4 @@
 # password_generator_rust
-Rust password generator
+[x] Rust password generator 
+[ ] Unite tests
+[ ] Tests in rust
