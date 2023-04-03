@@ -2,4 +2,3 @@
 
 - [x] Rust password generator 
 - [x] Unite tests
-- [ ] Tests in rust
