@@ -17,8 +17,10 @@ enum PasswordKind {
     Letter,
     Mix,
 }
+const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+                            abcdefghijklmnopqrstuvwxyz";
 
-
+const NUMSET: &[u8] = b"0123456789";
 fn choose_kind()->PasswordKind{
 println!("Choose_kind: \n1.Letter\n2.Number\n3.Mix");
 let mut input = String::new();
@@ -58,13 +60,21 @@ fn generate_password(properties:PasswordProperties)->String{
     let mut pwd = String::new(); // ? Do I need to keep it mut pytanie na później
     match properties.kind { 
         PasswordKind::Letter=>{println!("1");
-        for x in 1..properties.lenght{
             //TODO: Logika funkcji + rand ale w zakresie ascii 65-90 A-Z i 97-172 a-z
-        }pwd},
+            pwd = (0..properties.lenght).map(|_| {
+            let idx = thread_rng().gen_range(0..CHARSET.len());
+            CHARSET[idx] as char
+        })
+        .collect();    
+        pwd},
         PasswordKind::Number=>{println!("2");
-        for x in 1..properties.lenght{
-            //TODO: Logika funkcji + rand jak zrobić 
-        }pwd},
+        
+        pwd = (0..properties.lenght).map(|_| {
+                let idx = thread_rng().gen_range(0..NUMSET.len());
+                NUMSET[idx] as char
+        })
+        .collect();
+        pwd},
         PasswordKind::Mix=>{println!("3");
             //TODO: Logika funkcji + rand jak zrobić połączyć oba rozwiązania 
             pwd = thread_rng()
