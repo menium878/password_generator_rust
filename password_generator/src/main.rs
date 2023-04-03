@@ -57,32 +57,32 @@ fn input_lenght()->i32{
 }
 
 fn generate_password(properties:PasswordProperties)->String{
-    let mut pwd = String::new(); // ? Do I need to keep it mut pytanie na później
+    
     match properties.kind { 
         PasswordKind::Letter=>{println!("1");
             //TODO: Logika funkcji + rand ale w zakresie ascii 65-90 A-Z i 97-172 a-z
-            pwd = (0..properties.lenght).map(|_| {
+                
+        (0..properties.lenght).map(|_| {
             let idx = thread_rng().gen_range(0..CHARSET.len());
             CHARSET[idx] as char
         })
-        .collect();    
-        pwd},
+        .collect()},
         PasswordKind::Number=>{println!("2");
         
-        pwd = (0..properties.lenght).map(|_| {
+        
+        (0..properties.lenght).map(|_| {
                 let idx = thread_rng().gen_range(0..NUMSET.len());
                 NUMSET[idx] as char
         })
-        .collect();
-        pwd},
+        .collect()},
         PasswordKind::Mix=>{println!("3");
             //TODO: Logika funkcji + rand jak zrobić połączyć oba rozwiązania 
-            pwd = thread_rng()
+            
+            thread_rng()
                 .sample_iter(&Alphanumeric)
                 .take(properties.lenght.try_into().unwrap())
                 .map(char::from)
-                .collect();
-            pwd},
+                .collect()},
     }
 }
 fn main() {
