@@ -40,12 +40,12 @@ match io::stdin().read_line(&mut input){
 }
 
 fn input_lenght()->i32{
-    println!("Podaj długość hasła: ");
+    println!("Lenght of the password: ");
     let mut input = String::new();
     match io::stdin().read_line(&mut input) {
         Ok(_) => {
-            println!("Podana długość to: {}",input);
-            match input.trim().parse(){ // !pamiętaj musi być trim bo inaczej występuje błąd, że bierze enter jako znak (tak obstawiam)
+            println!("Given lenght: {}",input);
+            match input.trim().parse(){ // !remember trim because will take whitespace if you don't do it
                 Ok(input) => input,
                 Err(_e) => {println!("Error_1 {}",_e);
             process::exit(1)},
@@ -59,26 +59,13 @@ fn input_lenght()->i32{
 fn generate_password(properties:PasswordProperties)->String{
     
     match properties.kind { 
-        PasswordKind::Letter=>{println!("1");
-            //TODO: Logika funkcji + rand ale w zakresie ascii 65-90 A-Z i 97-172 a-z
-                
-        (0..properties.lenght).map(|_| {
-            let idx = thread_rng().gen_range(0..CHARSET.len());
-            CHARSET[idx] as char
-        })
-        .collect()},
-        PasswordKind::Number=>{println!("2");
-        
-        
-        (0..properties.lenght).map(|_| {
-                let idx = thread_rng().gen_range(0..NUMSET.len());
-                NUMSET[idx] as char
-        })
-        .collect()},
-        PasswordKind::Mix=>{println!("3");
-            //TODO: Logika funkcji + rand jak zrobić połączyć oba rozwiązania 
-            
-            thread_rng()
+        PasswordKind::Letter=>{(0..properties.lenght).map(|_| {let idx = thread_rng().gen_range(0..CHARSET.len());
+                CHARSET[idx] as char
+                }).collect()},
+        PasswordKind::Number=>{(0..properties.lenght).map(|_| {let idx = thread_rng().gen_range(0..NUMSET.len());
+                    NUMSET[idx] as char
+                }).collect()},
+        PasswordKind::Mix=>{thread_rng()
                 .sample_iter(&Alphanumeric)
                 .take(properties.lenght.try_into().unwrap())
                 .map(char::from)
@@ -90,6 +77,6 @@ fn main() {
     let kind = choose_kind();
     let passprop=PasswordProperties::new(lenght, kind);
     let password=generate_password(passprop);
-    println!("{:?}",password);
+    println!("{}",password); // ! {:?} will give output with ""
     
 }
